@@ -17,3 +17,5 @@ backend/obj/
 backend/packages/
 backend/.vs/
 backend/*.vscode/
+
+*.sln

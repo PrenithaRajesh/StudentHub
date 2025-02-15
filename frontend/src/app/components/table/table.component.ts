@@ -1,6 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { AgGridAngular } from 'ag-grid-angular';
-import { ButtonComponent } from '../button/button.component';
 
 @Component({
   selector: 'app-table',

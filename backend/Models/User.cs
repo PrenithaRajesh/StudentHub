@@ -8,9 +8,7 @@ namespace backend.Models
         public string Profile { get; set; } = "";
         public string Description { get; set; } = "";
         public string Email { get; set; } = "";
-        public string AddressText { get; set; } = "";
-        public decimal Latitude { get; set; }
-        public decimal Longitude { get; set; }
+        public string Address { get; set; } = "";
         public decimal Physics { get; set; }
         public decimal Chemistry { get; set; }
         public decimal Maths { get; set; }

@@ -32,14 +32,14 @@ namespace backend.Controllers
         [HttpPost("addUser")]
         public bool AddUser(User user)
         {
-            string sql = @"INSERT INTO StudentHub.Users (FirstName, LastName, Profile, Description, Email, AddressText, Latitude, Longitude, Physics, Chemistry, Maths, CreatedAt, UpdatedAt) VALUES (@FirstName, @LastName, @Profile, @Description, @Email, @AddressText, @Latitude, @Longitude, @Physics, @Chemistry, @Maths, @CreatedAt, @UpdatedAt)";
+            string sql = @"INSERT INTO StudentHub.Users (FirstName, LastName, Profile, Description, Email, Address, Physics, Chemistry, Maths, CreatedAt, UpdatedAt) VALUES (@FirstName, @LastName, @Profile, @Description, @Email, @Address, @Physics, @Chemistry, @Maths, @CreatedAt, @UpdatedAt)";
             return dapper.StoreData(sql, user);
         }
 
         [HttpPut("updateUser")]
         public bool UpdateUser(User user)
         {
-            string sql = @"UPDATE StudentHub.Users SET FirstName = @FirstName, LastName = @LastName, Profile = @Profile, Description = @Description, Email = @Email, AddressText = @AddressText, Latitude = @Latitude, Longitude = @Longitude, Physics = @Physics, Chemistry = @Chemistry, Maths = @Maths, UpdatedAt = @UpdatedAt WHERE StudentId = @StudentId";
+            string sql = @"UPDATE StudentHub.Users SET FirstName = @FirstName, LastName = @LastName, Profile = @Profile, Description = @Description, Email = @Email, Address = @Address, Physics = @Physics, Chemistry = @Chemistry, Maths = @Maths, UpdatedAt = @UpdatedAt WHERE StudentId = @StudentId";
             return dapper.StoreData(sql, user);
         }
 

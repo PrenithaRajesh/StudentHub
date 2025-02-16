@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { DataService } from '../services/data.service';
-import { MarksComponent } from 'src/app/marks/marks.component';
+import { MarksComponent } from '../marks/marks.component';
 
 @Component({
   selector: 'app-table',

@@ -7,7 +7,13 @@ import { NavComponent } from './components/nav/nav.component';
 import { ButtonComponent } from './components/button/button.component';
 import { TableComponent } from './components/table/table.component';
 import { AgGridModule } from 'ag-grid-angular';
-import { ModuleRegistry } from 'ag-grid-community'; 
+import { ModuleRegistry } from 'ag-grid-community';
+import { AddMapComponent } from './components/add-map/add-map.component'; 
+import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatCardModule } from '@angular/material/card';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 
 // Register all Community features
 // ModuleRegistry.registerModules([AllCommunityModule]);
@@ -18,13 +24,14 @@ import { ModuleRegistry } from 'ag-grid-community';
     AppComponent,
     NavComponent,
     ButtonComponent,
-    TableComponent
+    TableComponent,
+    AddMapComponent,
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,
+    AppRoutingModule,MatCardModule,
     // here add the components that you want AgGrid to use
-    AgGridModule.withComponents([]),
+    AgGridModule.withComponents([]),FormsModule,CommonModule, BrowserAnimationsModule,HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

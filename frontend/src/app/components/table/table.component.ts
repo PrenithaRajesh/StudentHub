@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { DataService } from 'src/app/services/data.service';
 
 @Component({
   selector: 'app-table',
@@ -7,6 +9,8 @@ import { Component, OnInit } from '@angular/core';
 })
 
 export class TableComponent implements OnInit {
+
+  constructor(private _DataService: DataService, private dialog: MatDialog) {}
 
   defaultColDef = {
 
@@ -48,7 +52,7 @@ export class TableComponent implements OnInit {
   ];
   rowData = []
 
-  constructor() { }
+  
 
   ngOnInit(): void {
   }

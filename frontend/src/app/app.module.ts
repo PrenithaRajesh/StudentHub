@@ -8,6 +8,9 @@ import { ButtonComponent } from './components/button/button.component';
 import { TableComponent } from './components/table/table.component';
 import { AgGridModule } from 'ag-grid-angular';
 import { ModuleRegistry } from 'ag-grid-community'; 
+import { HttpClientModule } from '@angular/common/http';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatDialogModule } from '@angular/material/dialog';
 
 // Register all Community features
 // ModuleRegistry.registerModules([AllCommunityModule]);
@@ -25,6 +28,9 @@ import { ModuleRegistry } from 'ag-grid-community';
     AppRoutingModule,
     // here add the components that you want AgGrid to use
     AgGridModule.withComponents([]),
+    HttpClientModule,
+    BrowserAnimationsModule,
+    MatDialogModule
   ],
   providers: [],
   bootstrap: [AppComponent]

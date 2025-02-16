@@ -8,8 +8,7 @@ import { ButtonComponent } from './components/button/button.component';
 import { TableComponent } from './components/table/table.component';
 import { AgGridModule } from 'ag-grid-angular';
 import { ModuleRegistry } from 'ag-grid-community';
-import { HttpClientModule } from '@angular/common/http';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 import { MatDialogModule } from '@angular/material/dialog';
 import { AddMapComponent } from './components/add-map/add-map.component'; 
 import { FormsModule } from '@angular/forms';
@@ -31,10 +30,11 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
     AddMapComponent,
   ],
   imports: [
-    BrowserModule,
+    BrowserModule,BrowserAnimationsModule,
     AppRoutingModule,MatCardModule,
     // here add the components that you want AgGrid to use
-    AgGridModule.withComponents([]),
+    AgGridModule.withComponents([]),CommonModule,FormsModule,HttpClientModule,
+    MatDialogModule
   ],
   providers: [],
   bootstrap: [AppComponent]

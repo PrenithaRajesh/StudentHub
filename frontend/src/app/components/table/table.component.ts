@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AgGridAngular } from 'ag-grid-angular';
 import { ButtonComponent } from '../button/button.component';
+import { UpdateDataComponent } from 'src/app/update-data/update-data.component';
 
 @Component({
   selector: 'app-table',
@@ -15,38 +16,37 @@ export class TableComponent implements OnInit {
   }
 
   defaultColGroupDef = {
-  
+
   }
 
-  frameworkComponents = [
-    
-  ]
+  frameworkComponents = {updateDataRenderer: UpdateDataComponent}
 
   columnDefs = [
 
     // Radhika
-    {headerName:'ID', field: 'Id' , CellRenderer:'', cellEditor:''},
+    { headerName: 'ID', field: 'Id', pinned: 'left', lockPosition: true, width: 150, CellRendererFramework: 'updateDataRenderer' },
 
     //Prenitha
-    { headerName:'Name',field: 'Name' , CellRenderer:'', cellEditor:''},
+    { headerName: 'Name', field: 'Name', CellRenderer: '', cellEditor: '' },
 
     // Baibhav
-    { headerName:'Email',field: 'Email' , CellRenderer:'', cellEditor:''},
+    { headerName: 'Email', field: 'Email', CellRenderer: '', cellEditor: '' },
 
     // Jyotsana
-    { headerName:'Address',field:'Address', CellRenderer:'', cellEditor:''},
+    { headerName: 'Address', field: 'Address', CellRenderer: '', cellEditor: '' },
 
     // Paridhi and Anish
-    {headerName:'Marks' , field:'Marks', groupId:'MarksGroup', marryChildren:true,CellRenderer:'', cellEditor:'' ,
+    {
+      headerName: 'Marks', field: 'Marks', groupId: 'MarksGroup', marryChildren: true, CellRenderer: '', cellEditor: '',
 
-      children:[
-        {headerName: 's1',columnGroupShow:'open'},
-        {headerName:'s2',columnGroupShow:'open'},
-        {headerName:'s3',columnGroupShow:'open'},
-        {headerName:'total' }
+      children: [
+        { headerName: 's1', columnGroupShow: 'open' },
+        { headerName: 's2', columnGroupShow: 'open' },
+        { headerName: 's3', columnGroupShow: 'open' },
+        { headerName: 'total' }
       ]
     }
-    
+
   ];
   rowData = []
 
@@ -55,8 +55,7 @@ export class TableComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  onGridReady(params:any)
-  {
+  onGridReady(params: any) {
 
   }
 

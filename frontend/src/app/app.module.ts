@@ -7,7 +7,8 @@ import { NavComponent } from './components/nav/nav.component';
 import { ButtonComponent } from './components/button/button.component';
 import { TableComponent } from './components/table/table.component';
 import { AgGridModule } from 'ag-grid-angular';
-import { ModuleRegistry } from 'ag-grid-community'; 
+import { ModuleRegistry } from 'ag-grid-community';
+import { UpdateDataComponent } from './update-data/update-data.component'; 
 
 // Register all Community features
 // ModuleRegistry.registerModules([AllCommunityModule]);
@@ -18,7 +19,8 @@ import { ModuleRegistry } from 'ag-grid-community';
     AppComponent,
     NavComponent,
     ButtonComponent,
-    TableComponent
+    TableComponent,
+    UpdateDataComponent
   ],
   imports: [
     BrowserModule,

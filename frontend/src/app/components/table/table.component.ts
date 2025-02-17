@@ -3,7 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { DataService } from '../../services/data.service';
 import { MarksComponent } from '../marks/marks.component';
 import { AddMapComponent } from '../add-map/add-map.component';
-import { TotalMarksComponent } from 'src/app/components/total-marks/total-marks.component';
+import { NameComponent } from '../name/name.component';
 
 @Component({
   selector: 'app-table',
@@ -33,7 +33,7 @@ export class TableComponent implements OnInit {
     {headerName:'ID', field: 'studentId' , CellRenderer:'', cellEditor:''},
 
     //Prenitha
-    { headerName:'Name',field: 'firstName' , CellRenderer:'', cellEditor:''},
+    { headerName:'Name',field: 'firstName' , onCellClicked: (params: any) => this.openNameDialog(params), columnGroupShow: 'open'},
 
     // 
     { headerName:'Email',field: 'email' , CellRenderer:'', cellEditor:''},
@@ -116,6 +116,15 @@ export class TableComponent implements OnInit {
       data: { params }
     });
   }
+
+  openNameDialog(params: any) {
+    console.log(params.data);
+    this.dialog.open(NameComponent, {
+      width: '800px',
+      data: { params }
+    })
+  }
+}
 
   openTotalMarksDialog(params: any) {
     const student = params.data;

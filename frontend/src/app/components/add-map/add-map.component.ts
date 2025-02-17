@@ -11,7 +11,7 @@ import VectorSource from 'ol/source/Vector';
 import Style from 'ol/style/Style';
 import Icon from 'ol/style/Icon';
 import { HttpClient } from '@angular/common/http';
-import { DataService } from 'src/app/services/data.service';
+import { DataService } from '../../services/data.service';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 
 

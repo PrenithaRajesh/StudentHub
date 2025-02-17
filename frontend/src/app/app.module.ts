@@ -16,6 +16,7 @@ import { CommonModule } from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatCardModule } from '@angular/material/card';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { NameComponent } from './components/name/name.component';
 
 // Register all Community features
 // ModuleRegistry.registerModules([AllCommunityModule]);
@@ -28,6 +29,7 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
     ButtonComponent,
     TableComponent,
     AddMapComponent,
+    NameComponent,
   ],
   imports: [
     BrowserModule,BrowserAnimationsModule,

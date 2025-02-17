@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 @Injectable({ providedIn: 'root' })
 
 export class DataService{
-    private apiUrl = 'http://localhost:5000/api/user';
+    private apiUrl = 'https://localhost:5001/api/User';
     constructor(private http:HttpClient){}
     
     getUsers():Observable<any>{

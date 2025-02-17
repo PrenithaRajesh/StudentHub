@@ -7,10 +7,15 @@ import { NavComponent } from './components/nav/nav.component';
 import { ButtonComponent } from './components/button/button.component';
 import { TableComponent } from './components/table/table.component';
 import { AgGridModule } from 'ag-grid-angular';
-import { ModuleRegistry } from 'ag-grid-community'; 
-import { HttpClientModule } from '@angular/common/http';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ModuleRegistry } from 'ag-grid-community';
+
 import { MatDialogModule } from '@angular/material/dialog';
+import { AddMapComponent } from './components/add-map/add-map.component'; 
+import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatCardModule } from '@angular/material/card';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 
 // Register all Community features
 // ModuleRegistry.registerModules([AllCommunityModule]);
@@ -21,15 +26,14 @@ import { MatDialogModule } from '@angular/material/dialog';
     AppComponent,
     NavComponent,
     ButtonComponent,
-    TableComponent
+    TableComponent,
+    AddMapComponent,
   ],
   imports: [
-    BrowserModule,
-    AppRoutingModule,
+    BrowserModule,BrowserAnimationsModule,
+    AppRoutingModule,MatCardModule,
     // here add the components that you want AgGrid to use
-    AgGridModule.withComponents([]),
-    HttpClientModule,
-    BrowserAnimationsModule,
+    AgGridModule.withComponents([]),CommonModule,FormsModule,HttpClientModule,
     MatDialogModule
   ],
   providers: [],

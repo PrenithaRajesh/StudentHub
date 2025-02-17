@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { DataService } from '../../services/data.service';
 import { MarksComponent } from '../marks/marks.component';
+import { AddMapComponent } from '../add-map/add-map.component';
 import { TotalMarksComponent } from 'src/app/components/total-marks/total-marks.component';
 
 @Component({
@@ -21,7 +22,7 @@ export class TableComponent implements OnInit {
   defaultColGroupDef = {
   
   }
-
+ 
   frameworkComponents = [
     
   ]
@@ -34,11 +35,11 @@ export class TableComponent implements OnInit {
     //Prenitha
     { headerName:'Name',field: 'firstName' , CellRenderer:'', cellEditor:''},
 
-    // Baibhav
+    // 
     { headerName:'Email',field: 'email' , CellRenderer:'', cellEditor:''},
 
-    // Jyotsana
-    { headerName:'Address',field:'address', CellRenderer:'', cellEditor:''},
+    // Baibhav
+    { headerName:'Address',field:'address',onCellClicked: (params: any) => this.openAddDialog(params),columnGroupShow: 'open'},
     
     // Paridhi and Anish
     { 
@@ -81,6 +82,9 @@ export class TableComponent implements OnInit {
     this.LoadUsers();
   }
 
+  private gridApi:any;
+  
+
   onGridReady(params: any) {
     //this.gridApi = params.api;
     //this.gridApi.setRowData(this.rowData);
@@ -94,6 +98,22 @@ export class TableComponent implements OnInit {
     this.dialog.open(MarksComponent, {
       width: '400px',
       data: { subject, marks, marksList }
+    });
+  }
+
+
+
+  //For address : Baibhav
+  openAddDialog(params: any) {
+
+    console.log("param start")
+    console.log(params)
+    console.log("param end")
+    
+    
+    this.dialog.open(AddMapComponent, {
+      width: '400px',
+      data: { params }
     });
   }
 
@@ -112,4 +132,5 @@ export class TableComponent implements OnInit {
       }
     });
   }
-}
+  }
+

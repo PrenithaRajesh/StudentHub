@@ -53,19 +53,24 @@ export class TableComponent implements OnInit {
         { 
           headerName: 'Total', 
           field: 'totalMarks',
-          valueGetter: (params: { data: { physics: any; chemistry: any; maths: any; }; }) => params.data.physics + params.data.chemistry + params.data.maths 
+          onCellClicked: (params: any) => this.openTotalMarksDialog(params)
         }
       ]
     }
   ];
 
-  rowData = [];
+  rowData: { studentId: number; firstName: string; email: string; address: string; physics: number; chemistry: number; maths: number; totalMarks?: number; }[] = [];
+
+  //private gridApi: any;
 
   LoadUsers() {
     this._DataService.getUsers().subscribe(
       (data: any) => {
         console.log('API Response:', data);
-        this.rowData = data;
+        this.rowData = data.map((student: any) => ({
+          ...student,
+          totalMarks: student.physics + student.chemistry + student.maths
+        }));
       },
       (error) => {
         console.error('Error fetching users:', error);
@@ -78,18 +83,18 @@ export class TableComponent implements OnInit {
   }
 
   private gridApi:any;
-  onGridReady(params:any)
-  {
-    this.gridApi = params.api;
-    this.gridApi.setRowData(this.rowData);
+  
 
+  onGridReady(params: any) {
+    //this.gridApi = params.api;
+    //this.gridApi.setRowData(this.rowData);
   }
 
   openMarksDialog(params: any) {
     const subject = params.colDef.headerName;
     const marks = params.value;
     if (marks === undefined || marks === null) return;
-    const marksList = this.rowData.map(student => student[params.colDef.field]);
+    const marksList = this.rowData.map(student => student[params.colDef.field as keyof typeof student]);
     this.dialog.open(MarksComponent, {
       width: '400px',
       data: { subject, marks, marksList }
@@ -120,3 +125,21 @@ export class TableComponent implements OnInit {
     })
   }
 }
+
+  openTotalMarksDialog(params: any) {
+    const student = params.data;
+    const totalMarks = student.totalMarks;
+    const marksList = this.rowData.map(student => student.totalMarks);
+
+    this.dialog.open(TotalMarksComponent, {
+      width: '400px',
+      data: {
+        studentId: student.studentId,
+        studentName: student.firstName,
+        totalMarks: totalMarks, 
+        marksList
+      }
+    });
+  }
+  }
+

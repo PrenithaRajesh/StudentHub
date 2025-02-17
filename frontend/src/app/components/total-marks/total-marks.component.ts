@@ -1,27 +1,30 @@
-import { Component, Inject } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Component, Inject, OnInit } from '@angular/core';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 
 @Component({
-  selector: 'app-marks',
-  templateUrl: './marks.component.html',
-  styleUrls: ['./marks.component.scss']
+  selector: 'app-total-marks',
+  templateUrl: './total-marks.component.html',
+  styleUrls: ['./total-marks.component.scss']
 })
-export class MarksComponent {
-  subject: string;
-  marks: number;
+export class TotalMarksComponent{
+
+  studentId: string;
+  studentName: string;
+  totalMarks: number;
   average: number;
   highest: number;
   rank: number;
 
   constructor(
-    public dialogRef: MatDialogRef<MarksComponent>,
+    public dialogRef: MatDialogRef<TotalMarksComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {
-    this.subject = data.subject;
-    this.marks = data.marks;
+    this.studentId = data.studentId;
+    this.studentName = data.studentName;
+    this.totalMarks = data.totalMarks;
     this.average = this.calculateAverage(data.marksList);
     this.highest = Math.max(...data.marksList);
-    this.rank = this.calculateRank(data.marksList, data.marks);
+    this.rank = this.calculateRank(data.marksList, data.totalMarks);
   }
 
   calculateAverage(marksList: number[]): number {
@@ -37,4 +40,6 @@ export class MarksComponent {
   closeDialog(): void {
     this.dialogRef.close();
   }
+
 }
+

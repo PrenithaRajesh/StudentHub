@@ -115,7 +115,7 @@ export class TableComponent implements OnInit {
   openNameDialog(params: any) {
     console.log(params.data);
     this.dialog.open(NameComponent, {
-      width: '400px',
+      width: '800px',
       data: { params }
     })
   }

@@ -8,16 +8,18 @@ import { ButtonComponent } from './components/button/button.component';
 import { TableComponent } from './components/table/table.component';
 import { AgGridModule } from 'ag-grid-angular';
 import { ModuleRegistry } from 'ag-grid-community';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { MatDialogModule } from '@angular/material/dialog';
-import { AddMapComponent } from './components/add-map/add-map.component'; 
-import { FormsModule } from '@angular/forms';
+import { AddMapComponent } from './components/add-map/add-map.component';
+import { FormGroup, FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatCardModule } from '@angular/material/card';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 
-import { UpdateDataComponent } from './update-data/update-data.component';
+import { UpdateDataComponent } from './components/update-data/update-data.component';
+import { EditFormComponent } from './components/edit-form/edit-form.component';
 
 // Register all Community features
 // ModuleRegistry.registerModules([AllCommunityModule]);
@@ -29,15 +31,16 @@ import { UpdateDataComponent } from './update-data/update-data.component';
     NavComponent,
     ButtonComponent,
     TableComponent,
-    AddMapComponent,,
-    UpdateDataComponent
+    AddMapComponent,
+    UpdateDataComponent,
+    EditFormComponent
   ],
   imports: [
-    BrowserModule,BrowserAnimationsModule,
-    AppRoutingModule,MatCardModule,
+    BrowserModule, BrowserAnimationsModule,
+    AppRoutingModule, MatCardModule,
     // here add the components that you want AgGrid to use
-    AgGridModule.withComponents([]),CommonModule,FormsModule,HttpClientModule,
-    MatDialogModule
+    AgGridModule.withComponents([]), CommonModule, FormsModule, HttpClientModule,
+    MatDialogModule, ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

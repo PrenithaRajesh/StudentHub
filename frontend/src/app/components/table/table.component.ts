@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { DataService } from '../services/data.service';
+import { DataService } from '../../services/data.service';
 import { MarksComponent } from '../marks/marks.component';
 import { AddMapComponent } from '../add-map/add-map.component';
-import { UpdateDataComponent } from 'src/app/update-data/update-data.component';
+import { UpdateDataComponent } from 'src/app/components/update-data/update-data.component';
 
 @Component({
   selector: 'app-table',
@@ -12,7 +12,7 @@ import { UpdateDataComponent } from 'src/app/update-data/update-data.component';
 })
 
 export class TableComponent implements OnInit {
-  constructor(private _DataService: DataService, private dialog: MatDialog) {}
+  constructor(private _DataService: DataService, private dialog: MatDialog) { }
 
 
   defaultColDef = {
@@ -23,35 +23,35 @@ export class TableComponent implements OnInit {
 
   }
 
-  frameworkComponents = {updateDataRenderer: UpdateDataComponent}
+  frameworkComponents = { updateDataRenderer: UpdateDataComponent }
 
   columnDefs = [
 
     // Radhika
-    {headerName:'ID', field: 'studentId' , CellRenderer:'', cellEditor:''},
+    { headerName: 'ID', field: 'studentId', pinned: 'left', suppressMovable: true, cellRendererFramework: UpdateDataComponent, width: 60 },
 
     //Prenitha
-    { headerName:'Name',field: 'firstName' , CellRenderer:'', cellEditor:''},
+    { headerName: 'Name', field: 'firstName', CellRenderer: '', cellEditor: '' },
 
     // 
-    { headerName:'Email',field: 'email' , CellRenderer:'', cellEditor:''},
+    { headerName: 'Email', field: 'email', CellRenderer: '', cellEditor: '' },
 
     // Baibhav
-    { headerName:'Address',field:'address',onCellClicked: (params: any) => this.openAddDialog(params),columnGroupShow: 'open'},
-    
+    { headerName: 'Address', field: 'address', onCellClicked: (params: any) => this.openAddDialog(params), columnGroupShow: 'open' },
+
     // Paridhi and Anish
-    { 
-      headerName: 'Marks', 
-      groupId: 'MarksGroup', 
+    {
+      headerName: 'Marks',
+      groupId: 'MarksGroup',
       marryChildren: true,
       children: [
-        { headerName: 'Physics', field: 'physics', onCellClicked: (params: any) => this.openMarksDialog(params),  columnGroupShow: 'open' },
-        { headerName: 'Chemistry', field: 'chemistry', onCellClicked: (params: any) => this.openMarksDialog(params),  columnGroupShow: 'open'  },
-        { headerName: 'Maths', field: 'maths', onCellClicked: (params: any) => this.openMarksDialog(params),  columnGroupShow: 'open'  },
-        { 
-          headerName: 'Total', 
+        { headerName: 'Physics', field: 'physics', onCellClicked: (params: any) => this.openMarksDialog(params), columnGroupShow: 'open' },
+        { headerName: 'Chemistry', field: 'chemistry', onCellClicked: (params: any) => this.openMarksDialog(params), columnGroupShow: 'open' },
+        { headerName: 'Maths', field: 'maths', onCellClicked: (params: any) => this.openMarksDialog(params), columnGroupShow: 'open' },
+        {
+          headerName: 'Total',
           field: 'totalMarks',
-          valueGetter: (params: { data: { physics: any; chemistry: any; maths: any; }; }) => params.data.physics + params.data.chemistry + params.data.maths 
+          valueGetter: (params: { data: { physics: any; chemistry: any; maths: any; }; }) => params.data.physics + params.data.chemistry + params.data.maths
         }
       ]
     }
@@ -75,9 +75,8 @@ export class TableComponent implements OnInit {
     this.LoadUsers();
   }
 
-  private gridApi:any;
-  onGridReady(params:any)
-  {
+  private gridApi: any;
+  onGridReady(params: any) {
     this.gridApi = params.api;
     this.gridApi.setRowData(this.rowData);
 
@@ -102,8 +101,8 @@ export class TableComponent implements OnInit {
     console.log("param start")
     console.log(params)
     console.log("param end")
-    
-    
+
+
     this.dialog.open(AddMapComponent, {
       width: '400px',
       data: { params }

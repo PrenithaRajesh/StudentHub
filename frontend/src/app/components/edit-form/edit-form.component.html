@@ -1,0 +1,23 @@
+<h2>Edit Student Data</h2>
+
+<h4>Student ID: {{data.studentId}}</h4>
+<form #editForm="ngForm" (ngSubmit)="onSubmit(editForm)">
+  <label>First Name: </label> <input type="text" [(ngModel)]="data.firstName" name="firstName"
+    placeholder="{{data.firstName}}" /><br>
+  <label>Last Name: </label> <input type="text" [(ngModel)]="data.lastName" name="lastName"
+    placeholder="{{data.lastName}}" /><br>
+  <label>Description: </label> <textarea type="text" [(ngModel)]="data.description" name="description"
+    placeholder="{{data.description}}"></textarea><br>
+  <label>Email: </label><input type="email" [(ngModel)]="data.email" name="email" placeholder="{{data.email}}" /><br>
+
+  <h3>Update Marks</h3>
+  <label>Physics: </label><input type="number" [(ngModel)]="data.physics" name="physics"
+    placeholder="{{data.physics}}" /><br>
+  <label>Chemistry: </label><input type="number" [(ngModel)]="data.chemistry" name="chemistry"
+    placeholder="{{data.chemistry}}" /><br>
+  <label>Maths: </label><input type="number" [(ngModel)]="data.maths" name="maths" placeholder="{{data.maths}}" /><br>
+
+  <button type="submit">Submit</button>
+  <button type="reset">Reset</button>
+  <button type="button" (click)="onCancel()">Cancel</button>
+</form>

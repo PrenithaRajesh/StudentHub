@@ -11,7 +11,7 @@ import VectorSource from 'ol/source/Vector';
 import Style from 'ol/style/Style';
 import Icon from 'ol/style/Icon';
 import { HttpClient } from '@angular/common/http';
-import { DataService } from '../services/data.service';
+import { DataService } from '../../services/data.service';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 
 
@@ -25,18 +25,17 @@ export class AddMapComponent implements OnInit {
   http = inject(HttpClient);
   map!: Map;
 
-  params :  any;
+  params: any;
   studentName: string = "John Locke";
   studentAddr: string = '';
   latitude: number = 25;
   longitude: number = 85;
   markerFeature!: Feature;
-  profilePic : string='';
+  profilePic: string = '';
 
-  constructor(private _DataService: DataService, public dialogRef: MatDialogRef<AddMapComponent>, @Inject(MAT_DIALOG_DATA) public data: any)
-  {
+  constructor(private _DataService: DataService, public dialogRef: MatDialogRef<AddMapComponent>, @Inject(MAT_DIALOG_DATA) public data: any) {
     this.params = data.params
-    this.studentName = data.params.data['firstName']+" "+data.params.data['lastName'];
+    this.studentName = data.params.data['firstName'] + " " + data.params.data['lastName'];
     this.profilePic = data.params.data['profile'];
     this.extractLatLong(data.params.value);
   }
@@ -63,7 +62,7 @@ export class AddMapComponent implements OnInit {
   }*/
 
   initializeMap() {
-    
+
 
     this.markerFeature = new Feature({
       geometry: new Point(fromLonLat([this.longitude, this.latitude])),
@@ -136,7 +135,7 @@ export class AddMapComponent implements OnInit {
 
     this.http.get(url).subscribe((response: any) => {
       if (response && response.data && response.data.length > 0) {
-        
+
         const result = response.data[0];
         console.log(result)
         this.studentAddr = result.label
@@ -147,26 +146,25 @@ export class AddMapComponent implements OnInit {
     });
   }
 
-  updateAddress()
-  {
+  updateAddress() {
     alert("updated")
   }
 
   extractLatLong(coordinates: string) {
     const regex = /([0-9.]+)°\s?([NS]),\s?([0-9.]+)°\s?([EW])/;
     const matches = coordinates.match(regex);
-  
+
     if (!matches) {
       throw new Error('Invalid coordinate format');
     }
-  
+
     this.latitude = parseFloat(matches[1]) * (matches[2] === 'N' ? 1 : -1);
     this.longitude = parseFloat(matches[3]) * (matches[4] === 'E' ? 1 : -1);
-    
+
   }
 
   closeDialog(): void {
     this.dialogRef.close();
   }
-  
+
 }

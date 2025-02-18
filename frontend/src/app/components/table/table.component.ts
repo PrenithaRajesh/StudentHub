@@ -4,6 +4,7 @@ import { DataService } from '../../services/data.service';
 import { MarksComponent } from '../marks/marks.component';
 import { AddMapComponent } from '../add-map/add-map.component';
 import { NameComponent } from '../name/name.component';
+import { TotalMarksComponent } from '../total-marks/total-marks.component';
 
 @Component({
   selector: 'app-table',
@@ -14,29 +15,16 @@ import { NameComponent } from '../name/name.component';
 export class TableComponent implements OnInit {
   constructor(private _DataService: DataService, private dialog: MatDialog) {}
 
-
-  defaultColDef = {
-
-  }
-
-  defaultColGroupDef = {
-  
-  }
- 
-  frameworkComponents = [
-    
-  ]
-
   columnDefs = [
 
     // Radhika
-    {headerName:'ID', field: 'studentId' , CellRenderer:'', cellEditor:''},
+    {headerName:'ID', field: 'studentId' , cellRenderer:'', cellEditor:''},
 
     //Prenitha
     { headerName:'Name',field: 'firstName' , onCellClicked: (params: any) => this.openNameDialog(params), columnGroupShow: 'open'},
 
-    // 
-    { headerName:'Email',field: 'email' , CellRenderer:'', cellEditor:''},
+    // Jyotsna
+    { headerName:'Email',field: 'email' , cellRenderer:'', cellEditor:''},
 
     // Baibhav
     { headerName:'Address',field:'address',onCellClicked: (params: any) => this.openAddDialog(params),columnGroupShow: 'open'},
@@ -124,7 +112,6 @@ export class TableComponent implements OnInit {
       data: { params }
     })
   }
-}
 
   openTotalMarksDialog(params: any) {
     const student = params.data;
@@ -141,5 +128,6 @@ export class TableComponent implements OnInit {
       }
     });
   }
-  }
+}
+
 

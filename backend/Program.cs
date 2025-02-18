@@ -25,7 +25,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseCors("AllowAll");
 app.UseRouting();
-app.UseAuthorization(); 
+// app.UseAuthorization(); 
 
 app.MapControllers();
 

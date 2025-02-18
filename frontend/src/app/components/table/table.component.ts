@@ -5,6 +5,7 @@ import { MarksComponent } from '../marks/marks.component';
 import { AddMapComponent } from '../add-map/add-map.component';
 import { NameComponent } from '../name/name.component';
 import { TotalMarksComponent } from '../total-marks/total-marks.component';
+import { UpdateDataComponent } from 'src/app/components/update-data/update-data.component';
 
 @Component({
   selector: 'app-table',
@@ -15,10 +16,11 @@ import { TotalMarksComponent } from '../total-marks/total-marks.component';
 export class TableComponent implements OnInit {
   constructor(private _DataService: DataService, private dialog: MatDialog) {}
 
+  frameworkComponents = { updateDataRenderer: UpdateDataComponent }
   columnDefs = [
 
     // Radhika
-    {headerName:'ID', field: 'studentId' , cellRenderer:'', cellEditor:''},
+    { headerName: 'ID', field: 'studentId', pinned: 'left', suppressMovable: true, cellRendererFramework: UpdateDataComponent, width: 60 },
 
     //Prenitha
     { headerName:'Name',field: 'firstName' , onCellClicked: (params: any) => this.openNameDialog(params), columnGroupShow: 'open'},
@@ -27,19 +29,19 @@ export class TableComponent implements OnInit {
     { headerName:'Email',field: 'email' , cellRenderer:'', cellEditor:''},
 
     // Baibhav
-    { headerName:'Address',field:'address',onCellClicked: (params: any) => this.openAddDialog(params),columnGroupShow: 'open'},
-    
+    { headerName: 'Address', field: 'address', onCellClicked: (params: any) => this.openAddDialog(params), columnGroupShow: 'open' },
+
     // Paridhi and Anish
-    { 
-      headerName: 'Marks', 
-      groupId: 'MarksGroup', 
+    {
+      headerName: 'Marks',
+      groupId: 'MarksGroup',
       marryChildren: true,
       children: [
-        { headerName: 'Physics', field: 'physics', onCellClicked: (params: any) => this.openMarksDialog(params),  columnGroupShow: 'open' },
-        { headerName: 'Chemistry', field: 'chemistry', onCellClicked: (params: any) => this.openMarksDialog(params),  columnGroupShow: 'open'  },
-        { headerName: 'Maths', field: 'maths', onCellClicked: (params: any) => this.openMarksDialog(params),  columnGroupShow: 'open'  },
-        { 
-          headerName: 'Total', 
+        { headerName: 'Physics', field: 'physics', onCellClicked: (params: any) => this.openMarksDialog(params), columnGroupShow: 'open' },
+        { headerName: 'Chemistry', field: 'chemistry', onCellClicked: (params: any) => this.openMarksDialog(params), columnGroupShow: 'open' },
+        { headerName: 'Maths', field: 'maths', onCellClicked: (params: any) => this.openMarksDialog(params), columnGroupShow: 'open' },
+        {
+          headerName: 'Total',
           field: 'totalMarks',
           onCellClicked: (params: any) => this.openTotalMarksDialog(params)
         }
@@ -97,8 +99,8 @@ export class TableComponent implements OnInit {
     console.log("param start")
     console.log(params)
     console.log("param end")
-    
-    
+
+
     this.dialog.open(AddMapComponent, {
       width: '400px',
       data: { params }

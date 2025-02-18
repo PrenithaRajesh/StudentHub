@@ -19,15 +19,17 @@ export class EditFormComponent {
       const updatedStudent = { ...this.data, ...form.value };
       this.dataService.updateUser(updatedStudent.studentId, updatedStudent).subscribe(response => {
         alert('Student data updated successfully!');
+        this.dialogRef.close();
+        window.location.reload();
       }, (error: any) => {
         console.error('Error updating user:', error);
       });
     }
   }
 
-
   onCancel(): void {
     this.dialogRef.close();
+    window.location.reload();
   }
 
 }

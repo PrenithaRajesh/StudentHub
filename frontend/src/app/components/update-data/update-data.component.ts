@@ -1,6 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import { ICellRendererAngularComp } from 'ag-grid-angular';
-import { ICellRendererParams, IAfterGuiAttachedParams } from 'ag-grid-community';
+import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { EditFormComponent } from '../edit-form/edit-form.component';
 
@@ -9,24 +7,14 @@ import { EditFormComponent } from '../edit-form/edit-form.component';
   templateUrl: './update-data.component.html',
   styleUrls: ['./update-data.component.scss']
 })
-export class UpdateDataComponent implements ICellRendererAngularComp {
+export class UpdateDataComponent {
 
   params: any;
 
-  constructor(private dialog: MatDialog) {}
+  constructor(private dialog: MatDialog) { }
 
-  refresh(params: ICellRendererParams): boolean {
+  agInit(params: any): void {
     this.params = params;
-    return true;
-  }
-  agInit(params: ICellRendererParams): void {
-    this.params = params;
-  }
-  afterGuiAttached?(params?: IAfterGuiAttachedParams): void {
-    throw new Error('Method not implemented.');
-  }
-
-  ngOnInit(): void {
   }
 
   onClick() {
@@ -36,10 +24,6 @@ export class UpdateDataComponent implements ICellRendererAngularComp {
     const dialogRef = this.dialog.open(EditFormComponent, {
       width: '400px',
       data: rowData
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('Form closed with result:', result);
     });
   }
 

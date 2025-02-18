@@ -47,9 +47,9 @@ export class EmailComponent {
     );
   }
 //  Add event parameter to the function
-  onFileChange(event: any) {
-    this.emailData.attachments = event.target.files;
-  }
+onFileChange(event: any) {
+  this.emailData.attachments = event.target.files.length ? event.target.files : null;
+}
 
   // Success Snackbar Popup
   showSuccessPopup() {

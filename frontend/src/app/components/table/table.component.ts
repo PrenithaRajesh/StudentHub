@@ -142,7 +142,8 @@ export class TableComponent implements OnInit {
     const receiverEmail = params.data.email;
     this.dialog.open(EmailComponent, {
       width: '400px',
-      data: { receiverEmail }
+      data: { receiverEmail },
+      autoFocus: false  // Add this line to prevent focus error
     });
   }
  

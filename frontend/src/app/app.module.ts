@@ -19,6 +19,7 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { NameComponent } from './components/name/name.component';
 import { UpdateDataComponent } from './components/update-data/update-data.component';
 import { EditFormComponent } from './components/edit-form/edit-form.component';
+import { EmailComponent } from './email/email.component';
 
 // Register all Community features
 // ModuleRegistry.registerModules([AllCommunityModule]);
@@ -33,7 +34,8 @@ import { EditFormComponent } from './components/edit-form/edit-form.component';
     AddMapComponent,
     NameComponent,
     UpdateDataComponent,
-    EditFormComponent
+    EditFormComponent,
+    EmailComponent
   ],
   imports: [
     BrowserModule, BrowserAnimationsModule,

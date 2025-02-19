@@ -1,0 +1,20 @@
+<form (ngSubmit)="onSendEmail()">
+
+    <h2 class="center">Send Email</h2>
+
+    <input [(ngModel)]="emailData.senderEmail" name="senderEmail" placeholder="Your Email" required />
+
+    <input type="password" [(ngModel)]="emailData.senderPassword" name="senderPassword"
+        placeholder="Your Email Password" required />
+
+    <input [(ngModel)]="emailData.receiverEmail" name="receiverEmail" placeholder="Receiver's Email" required />
+
+    <input [(ngModel)]="emailData.subject" name="subject" placeholder="Subject" required />
+
+    <textarea [(ngModel)]="emailData.body" name="body" placeholder="Body" required></textarea>
+
+    <input type="file" (change)="onFileChange($event)" />
+
+    <button type="submit">Send Email</button>
+
+</form>

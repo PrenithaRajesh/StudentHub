@@ -6,6 +6,7 @@ import { AddMapComponent } from '../add-map/add-map.component';
 import { NameComponent } from '../name/name.component';
 import { TotalMarksComponent } from '../total-marks/total-marks.component';
 import { UpdateDataComponent } from 'src/app/components/update-data/update-data.component';
+import { EmailComponent } from '../email/email.component';
 
 @Component({
   selector: 'app-table',
@@ -26,7 +27,13 @@ export class TableComponent implements OnInit {
     { headerName:'Name',field: 'firstName' , onCellClicked: (params: any) => this.openNameDialog(params), columnGroupShow: 'open'},
 
     // Jyotsna
-    { headerName:'Email',field: 'email' , cellRenderer:'', cellEditor:''},
+    { 
+      headerName:'Email',
+      field:'email', 
+      CellRenderer:'emailRenderer', 
+      onCellClicked: (params: any) => 
+        this.openEmailDialog(params),
+      columnGroupShow: 'open'},
 
     // Baibhav
     { headerName: 'Address', field: 'address', onCellClicked: (params: any) => this.openAddDialog(params), columnGroupShow: 'open' },
@@ -76,6 +83,7 @@ export class TableComponent implements OnInit {
   
 
   onGridReady(params: any) {
+    params.api.sizeColumnsToFit();
     //this.gridApi = params.api;
     //this.gridApi.setRowData(this.rowData);
   }
@@ -130,6 +138,15 @@ export class TableComponent implements OnInit {
       }
     });
   }
+  openEmailDialog(params: any) {
+    const receiverEmail = params.data.email;
+    this.dialog.open(EmailComponent, {
+      width: '400px',
+      data: { receiverEmail },
+      autoFocus: false  // Add this line to prevent focus error
+    });
+  }
+ 
 }
 
 

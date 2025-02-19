@@ -8,7 +8,7 @@ import { ButtonComponent } from './components/button/button.component';
 import { TableComponent } from './components/table/table.component';
 import { AgGridModule } from 'ag-grid-angular';
 import { ReactiveFormsModule } from '@angular/forms';
-
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatDialogModule } from '@angular/material/dialog';
 import { AddMapComponent } from './components/add-map/add-map.component';
 import { FormsModule } from '@angular/forms';
@@ -19,6 +19,7 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { NameComponent } from './components/name/name.component';
 import { UpdateDataComponent } from './components/update-data/update-data.component';
 import { EditFormComponent } from './components/edit-form/edit-form.component';
+import { EmailComponent } from './components/email/email.component';
 
 // Register all Community features
 // ModuleRegistry.registerModules([AllCommunityModule]);
@@ -33,14 +34,15 @@ import { EditFormComponent } from './components/edit-form/edit-form.component';
     AddMapComponent,
     NameComponent,
     UpdateDataComponent,
-    EditFormComponent
+    EditFormComponent,
+    EmailComponent
   ],
   imports: [
     BrowserModule, BrowserAnimationsModule,
     AppRoutingModule, MatCardModule,
     // here add the components that you want AgGrid to use
     AgGridModule.withComponents([]), CommonModule, FormsModule, HttpClientModule,
-    MatDialogModule, ReactiveFormsModule
+    MatDialogModule, ReactiveFormsModule,MatSnackBarModule
   ],
   providers: [],
   bootstrap: [AppComponent]

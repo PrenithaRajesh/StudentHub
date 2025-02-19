@@ -23,6 +23,7 @@
     "@types/ol": "^7.0.0",
     "ag-grid-angular": "^26.2.0",
     "ag-grid-community": "^26.2.1",
+    "bourbon": "^7.3.0",
     "ol": "^10.4.0",
     "rxjs": "~7.5.0",
     "tslib": "^2.3.0",

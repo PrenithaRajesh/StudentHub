@@ -26,7 +26,7 @@ export class EmailComponent {
     private snackBar: MatSnackBar, 
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {
-    //console.log('Received receiverEmail:', data.receiverEmail); 
+    console.log('Received receiverEmail:', data.receiverEmail); 
     this.emailData.receiverEmail = data.receiverEmail;
   }
 

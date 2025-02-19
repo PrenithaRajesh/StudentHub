@@ -22,7 +22,7 @@ export class UpdateDataComponent {
     console.log(`clicked on ID = ${this.params.value}`)
 
     const dialogRef = this.dialog.open(EditFormComponent, {
-      width: '500px',
+      width: '1200px',
       data: rowData
     });
 

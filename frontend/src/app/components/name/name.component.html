@@ -1,7 +1,11 @@
-<mat-dialog-content class="container">
-  <div class="box">
-    <img [src]="profile" alt="{{ firstname + lastname }}" />
-    <h1>{{ firstname + ' ' + lastname }}</h1>
-    <p>{{ description }}</p>
+<div mat-dialog-content class="dialog-container">
+  <div class="dialog-box">
+    <img [src]="profile" alt="{{ firstname + ' ' + lastname }}" class="dialog-image" />
+    <h1 class="dialog-title">{{ firstname + ' ' + lastname }}</h1>
+    <p class="dialog-description">{{ description }}</p>
   </div>
-</mat-dialog-content>
+</div>
+
+<div mat-dialog-actions class="dialog-actions">
+  <button mat-button class="dialog-button" (click)="closeDialog()">Close</button>
+</div>

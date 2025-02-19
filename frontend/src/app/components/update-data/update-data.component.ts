@@ -18,12 +18,19 @@ export class UpdateDataComponent {
   }
 
   onClick() {
-    const rowData = this.params.node.data;
+    const rowData = { ...this.params.node.data };
     console.log(`clicked on ID = ${this.params.value}`)
 
     const dialogRef = this.dialog.open(EditFormComponent, {
-      width: '400px',
+      width: '500px',
       data: rowData
+    });
+
+    dialogRef.afterClosed().subscribe(updatedData => {
+      if (updatedData) {
+        Object.assign(this.params.node.data, updatedData);
+        this.params.api.refreshCells({ rowNodes: [this.params.node] });
+      }
     });
   }
 

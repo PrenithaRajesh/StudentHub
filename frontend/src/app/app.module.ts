@@ -7,9 +7,12 @@ import { NavComponent } from './components/nav/nav.component';
 import { ButtonComponent } from './components/button/button.component';
 import { TableComponent } from './components/table/table.component';
 import { AgGridModule } from 'ag-grid-angular';
-import { ReactiveFormsModule } from '@angular/forms';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatButtonModule } from '@angular/material/button';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 import { AddMapComponent } from './components/add-map/add-map.component';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
@@ -42,7 +45,12 @@ import { EmailComponent } from './components/email/email.component';
     AppRoutingModule, MatCardModule,
     // here add the components that you want AgGrid to use
     AgGridModule.withComponents([]), CommonModule, FormsModule, HttpClientModule,
-    MatDialogModule, ReactiveFormsModule,MatSnackBarModule
+    MatDialogModule,
+    MatTabsModule,
+    MatButtonModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatSnackBarModule
   ],
   providers: [],
   bootstrap: [AppComponent]

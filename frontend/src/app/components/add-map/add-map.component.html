@@ -1,5 +1,5 @@
 <div>
-    <mat-card class="example-card">
+    <mat-card class="example-card" style="margin: 16px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
         <mat-card-header>
             <img mat-card-avatar
                 src="{{profilePic}}"
@@ -9,16 +9,22 @@
         </mat-card-header>
 
         <mat-card-content>
-            <div id="map" class="map"></div>
+            <div id="map" class="map" style="margin-bottom: 16px;"></div>
             <div>
                 <p>{{studentAddr}}</p>
-                Latitude: <input [(ngModel)]="latitude" type="text" (ngModelChange)="updateMarker()" /> <br>
-                Longitude: <input [(ngModel)]="longitude" type="text" (ngModelChange)="updateMarker()" />
+                <div style="display: flex; align-items: center; margin-bottom: 8px;">
+                    <label for="latitude" style="margin-right: 8px;">Latitude:</label>
+                    <input id="latitude" [(ngModel)]="latitude" type="text" (ngModelChange)="updateMarker()" />
+                </div>
+                <div style="display: flex; align-items: center; margin-bottom: 8px;">
+                    <label for="longitude" style="margin-right: 8px;">Longitude:</label>
+                    <input id="longitude" [(ngModel)]="longitude" type="text" (ngModelChange)="updateMarker()" />
+                </div>
             </div>
-
         </mat-card-content>
-        <mat-card-actions >
-            <button mat-button (click)="updateAddress()" disabled>Update Location</button>
+        
+        <mat-card-actions style="display: flex; justify-content: center; gap: 16px;">
+            <button mat-button (click)="updateAddress()" >Update Location</button>
             <button mat-button (click)="closeDialog()">Cancel</button>
         </mat-card-actions>
     </mat-card>

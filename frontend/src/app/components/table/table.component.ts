@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { DataService } from '../../services/data.service';
 import { MarksComponent } from '../marks/marks.component';
@@ -7,6 +7,7 @@ import { NameComponent } from '../name/name.component';
 import { TotalMarksComponent } from '../total-marks/total-marks.component';
 import { UpdateDataComponent } from 'src/app/components/update-data/update-data.component';
 import { EmailComponent } from '../email/email.component';
+import { LocationService } from 'src/app/services/location.service';
 
 @Component({
   selector: 'app-table',
@@ -16,6 +17,8 @@ import { EmailComponent } from '../email/email.component';
 
 export class TableComponent implements OnInit {
   constructor(private _DataService: DataService, private dialog: MatDialog) {}
+
+  loc = inject(LocationService);
 
   frameworkComponents = { updateDataRenderer: UpdateDataComponent }
   columnDefs = [
@@ -60,20 +63,21 @@ export class TableComponent implements OnInit {
 
   //private gridApi: any;
 
-  LoadUsers() {
-    this._DataService.getUsers().subscribe(
-      (data: any) => {
-        console.log('API Response:', data);
-        this.rowData = data.map((student: any) => ({
-          ...student,
-          totalMarks: student.physics + student.chemistry + student.maths
-        }));
-      },
-      (error) => {
-        console.error('Error fetching users:', error);
-      }
-    );
-  }
+LoadUsers() {
+  this._DataService.getUsers().subscribe(
+    (data: any) => {
+      console.log('API Response:', data);
+      this.rowData = data.map((student: any) => ({
+        ...student,
+        address: this.loc.getAddress(this.loc.extractLatLong(student.address)[0],this.loc.extractLatLong(student.address)[1])+student.address,
+        totalMarks: student.physics + student.chemistry + student.maths
+      }));
+    },
+    (error) => {
+      console.error('Error fetching users:', error);
+    }
+  );
+}
 
   ngOnInit(): void {
     this.LoadUsers();
@@ -138,6 +142,7 @@ export class TableComponent implements OnInit {
       }
     });
   }
+
   openEmailDialog(params: any) {
     const receiverEmail = params.data.email;
     this.dialog.open(EmailComponent, {

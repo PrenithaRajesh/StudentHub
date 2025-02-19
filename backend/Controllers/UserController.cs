@@ -50,5 +50,14 @@ namespace backend.Controllers
             return dapper.StoreData(sql, new { StudentId = studentId });
         }
 
+
+        [HttpPatch("updateAddress/{studentId:int}")]
+        public bool UpdateAddress(int studentId, [FromBody] string address)
+        {
+            string sql = @"UPDATE StudentHub.Users SET Address = @Address WHERE StudentId = @StudentId";
+            return dapper.StoreData(sql, new { Address = address, StudentId = studentId });
+
+
+        }
     }
-}
+    }

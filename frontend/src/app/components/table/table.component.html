@@ -1,11 +1,10 @@
 <ag-grid-angular 
-  style="height: 100vh;" 
+  style="height: 100%;" 
   class="ag-theme-alpine"
-  [defaultColDef]="defaultColDef"
-  [defaultColGroupDef]="defaultColGroupDef"
   [rowData]="rowData" 
   [columnDefs]="columnDefs"
-  [frameworkComponents] = "frameworkComponents"
   (gridReady)="onGridReady($event)"
+  [pagination]="true"
+  [paginationPageSize]="10"
   >
 </ag-grid-angular>

@@ -1,0 +1,12 @@
+<h2 mat-dialog-title>Total Marks Details</h2>
+<div mat-dialog-content>
+  <p><strong>Student ID:</strong> {{ studentId }}</p>
+  <p><strong>Student Name:</strong> {{ studentName }}</p>
+  <p><strong>Total Marks:</strong> {{ totalMarks }}</p>
+  <p><strong>Average Marks:</strong> {{ average.toFixed(2)}}</p>
+  <p><strong>Highest Marks:</strong> {{ highest }}</p>
+  <p><strong>Rank:</strong> {{ rank }}</p>
+</div>
+<div mat-dialog-actions align="end">
+  <button mat-button (click)="closeDialog()">Close</button>
+</div>

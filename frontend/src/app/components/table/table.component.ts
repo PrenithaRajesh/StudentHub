@@ -1,8 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { DataService } from '../services/data.service';
+import { DataService } from '../../services/data.service';
 import { MarksComponent } from '../marks/marks.component';
 import { AddMapComponent } from '../add-map/add-map.component';
+import { NameComponent } from '../name/name.component';
+import { TotalMarksComponent } from '../total-marks/total-marks.component';
+import { UpdateDataComponent } from 'src/app/components/update-data/update-data.component';
+import { EmailComponent } from '../email/email.component';
 
 @Component({
   selector: 'app-table',
@@ -13,58 +17,57 @@ import { AddMapComponent } from '../add-map/add-map.component';
 export class TableComponent implements OnInit {
   constructor(private _DataService: DataService, private dialog: MatDialog) {}
 
-
-  defaultColDef = {
-
-  }
-
-  defaultColGroupDef = {
-  
-  }
- 
-  frameworkComponents = [
-    
-  ]
-
+  frameworkComponents = { updateDataRenderer: UpdateDataComponent }
   columnDefs = [
 
     // Radhika
-    {headerName:'ID', field: 'studentId' , CellRenderer:'', cellEditor:''},
+    { headerName: 'ID', field: 'studentId', pinned: 'left', suppressMovable: true, cellRendererFramework: UpdateDataComponent, width: 60 },
 
     //Prenitha
-    { headerName:'Name',field: 'firstName' , CellRenderer:'', cellEditor:''},
+    { headerName:'Name',field: 'firstName' , onCellClicked: (params: any) => this.openNameDialog(params), columnGroupShow: 'open'},
 
-    // 
-    { headerName:'Email',field: 'email' , CellRenderer:'', cellEditor:''},
+    // Jyotsna
+    { 
+      headerName:'Email',
+      field:'email', 
+      CellRenderer:'emailRenderer', 
+      onCellClicked: (params: any) => 
+        this.openEmailDialog(params),
+      columnGroupShow: 'open'},
 
     // Baibhav
-    { headerName:'Address',field:'address',onCellClicked: (params: any) => this.openAddDialog(params),columnGroupShow: 'open'},
-    
+    { headerName: 'Address', field: 'address', onCellClicked: (params: any) => this.openAddDialog(params), columnGroupShow: 'open' },
+
     // Paridhi and Anish
-    { 
-      headerName: 'Marks', 
-      groupId: 'MarksGroup', 
+    {
+      headerName: 'Marks',
+      groupId: 'MarksGroup',
       marryChildren: true,
       children: [
-        { headerName: 'Physics', field: 'physics', onCellClicked: (params: any) => this.openMarksDialog(params),  columnGroupShow: 'open' },
-        { headerName: 'Chemistry', field: 'chemistry', onCellClicked: (params: any) => this.openMarksDialog(params),  columnGroupShow: 'open'  },
-        { headerName: 'Maths', field: 'maths', onCellClicked: (params: any) => this.openMarksDialog(params),  columnGroupShow: 'open'  },
-        { 
-          headerName: 'Total', 
+        { headerName: 'Physics', field: 'physics', onCellClicked: (params: any) => this.openMarksDialog(params), columnGroupShow: 'open' },
+        { headerName: 'Chemistry', field: 'chemistry', onCellClicked: (params: any) => this.openMarksDialog(params), columnGroupShow: 'open' },
+        { headerName: 'Maths', field: 'maths', onCellClicked: (params: any) => this.openMarksDialog(params), columnGroupShow: 'open' },
+        {
+          headerName: 'Total',
           field: 'totalMarks',
-          valueGetter: (params: { data: { physics: any; chemistry: any; maths: any; }; }) => params.data.physics + params.data.chemistry + params.data.maths 
+          onCellClicked: (params: any) => this.openTotalMarksDialog(params)
         }
       ]
     }
   ];
 
-  rowData = [];
+  rowData: { studentId: number; firstName: string; email: string; address: string; physics: number; chemistry: number; maths: number; totalMarks?: number; }[] = [];
+
+  //private gridApi: any;
 
   LoadUsers() {
     this._DataService.getUsers().subscribe(
       (data: any) => {
         console.log('API Response:', data);
-        this.rowData = data;
+        this.rowData = data.map((student: any) => ({
+          ...student,
+          totalMarks: student.physics + student.chemistry + student.maths
+        }));
       },
       (error) => {
         console.error('Error fetching users:', error);
@@ -77,18 +80,19 @@ export class TableComponent implements OnInit {
   }
 
   private gridApi:any;
-  onGridReady(params:any)
-  {
-    this.gridApi = params.api;
-    this.gridApi.setRowData(this.rowData);
+  
 
+  onGridReady(params: any) {
+    params.api.sizeColumnsToFit();
+    //this.gridApi = params.api;
+    //this.gridApi.setRowData(this.rowData);
   }
 
   openMarksDialog(params: any) {
     const subject = params.colDef.headerName;
     const marks = params.value;
     if (marks === undefined || marks === null) return;
-    const marksList = this.rowData.map(student => student[params.colDef.field]);
+    const marksList = this.rowData.map(student => student[params.colDef.field as keyof typeof student]);
     this.dialog.open(MarksComponent, {
       width: '400px',
       data: { subject, marks, marksList }
@@ -103,11 +107,46 @@ export class TableComponent implements OnInit {
     console.log("param start")
     console.log(params)
     console.log("param end")
-    
-    
+
+
     this.dialog.open(AddMapComponent, {
       width: '400px',
       data: { params }
     });
   }
+
+  openNameDialog(params: any) {
+    console.log(params.data);
+    this.dialog.open(NameComponent, {
+      width: '800px',
+      data: { params }
+    })
+  }
+
+  openTotalMarksDialog(params: any) {
+    const student = params.data;
+    const totalMarks = student.totalMarks;
+    const marksList = this.rowData.map(student => student.totalMarks);
+
+    this.dialog.open(TotalMarksComponent, {
+      width: '400px',
+      data: {
+        studentId: student.studentId,
+        studentName: student.firstName,
+        totalMarks: totalMarks, 
+        marksList
+      }
+    });
+  }
+  openEmailDialog(params: any) {
+    const receiverEmail = params.data.email;
+    this.dialog.open(EmailComponent, {
+      width: '400px',
+      data: { receiverEmail },
+      autoFocus: false  // Add this line to prevent focus error
+    });
+  }
+ 
 }
+
+

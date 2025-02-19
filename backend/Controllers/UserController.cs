@@ -37,7 +37,7 @@ namespace backend.Controllers
         }
 
         [HttpPut("updateUser")]
-        public bool UpdateUser(User user)
+        public bool UpdateUser([FromBody] User user)
         {
             string sql = @"UPDATE StudentHub.Users SET FirstName = @FirstName, LastName = @LastName, Profile = @Profile, Description = @Description, Email = @Email, Address = @Address, Physics = @Physics, Chemistry = @Chemistry, Maths = @Maths, UpdatedAt = @UpdatedAt WHERE StudentId = @StudentId";
             return dapper.StoreData(sql, user);

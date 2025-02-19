@@ -44,7 +44,7 @@ export class AddMapComponent implements OnInit {
 
   ngOnInit(): void {
 
-    //this.getAddress(this.latitude, this.longitude);
+    this.getAddress(this.latitude, this.longitude);
     console.log(this.params)
     //this.LoadUsers();
     this.initializeMap();
@@ -127,7 +127,7 @@ export class AddMapComponent implements OnInit {
   updateMarker() {
     this.markerFeature.setGeometry(new Point(fromLonLat([this.longitude, this.latitude])));
     this.map.getView().setCenter(fromLonLat([this.longitude, this.latitude]));
-    //this.getAddress(this.latitude, this.longitude);
+    this.getAddress(this.latitude, this.longitude);
   }
 
 

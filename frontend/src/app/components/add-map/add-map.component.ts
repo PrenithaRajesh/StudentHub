@@ -13,6 +13,7 @@ import Icon from 'ol/style/Icon';
 import { HttpClient } from '@angular/common/http';
 import { DataService } from '../../services/data.service';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { LocationService } from 'src/app/services/location.service';
 
 
 @Component({
@@ -23,47 +24,34 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 export class AddMapComponent implements OnInit {
 
   http = inject(HttpClient);
+  loc = inject(LocationService)
   map!: Map;
 
   params: any;
-  studentName: string = "John Locke";
+  studentId : any;
+  studentName: string = "";
   studentAddr: string = '';
   latitude: number = 25;
   longitude: number = 85;
   markerFeature!: Feature;
   profilePic: string = '';
 
-  constructor(private _DataService: DataService, public dialogRef: MatDialogRef<AddMapComponent>, @Inject(MAT_DIALOG_DATA) public data: any) {
+  constructor(private _DataService: DataService, public dialogRef: MatDialogRef<AddMapComponent>, @Inject(MAT_DIALOG_DATA) public data: any) 
+  {
     this.params = data.params
     this.studentName = data.params.data['firstName'] + " " + data.params.data['lastName'];
     this.profilePic = data.params.data['profile'];
-    this.extractLatLong(data.params.value);
+    this.studentId=data.params.data['studentId'];
+    this.latitude =this.loc.extractLatLong(data.params.value)[0] ;
+    this.longitude=this.loc.extractLatLong(data.params.value)[1];
   }
 
-
   ngOnInit(): void {
-
-    //this.getAddress(this.latitude, this.longitude);
-    console.log(this.params)
-    //this.LoadUsers();
+    this.getAddrText();
     this.initializeMap();
   }
 
-  /*LoadUsers() {
-    this._DataService.getUsers().subscribe(
-      (data: any) => {
-        console.log('API Response:', data);
-        //this.rowData = data;
-      },
-      (error) => {
-        console.error('Error fetching users:', error);
-      }
-    );
-  }*/
-
   initializeMap() {
-
-
     this.markerFeature = new Feature({
       geometry: new Point(fromLonLat([this.longitude, this.latitude])),
       name: 'Location'
@@ -115,10 +103,8 @@ export class AddMapComponent implements OnInit {
     this.map.on('click', (event) => {
       const coordinates = event.coordinate;
       const lonLat = toLonLat(coordinates);
-
       this.latitude = lonLat[1];
       this.longitude = lonLat[0];
-
       this.updateMarker();
     });
   }
@@ -126,43 +112,29 @@ export class AddMapComponent implements OnInit {
   updateMarker() {
     this.markerFeature.setGeometry(new Point(fromLonLat([this.longitude, this.latitude])));
     this.map.getView().setCenter(fromLonLat([this.longitude, this.latitude]));
-    //this.getAddress(this.latitude, this.longitude);
+    this.getAddrText();
+    
   }
 
-
-  getAddress(lat: number, lon: number) {
-    const url = `http://api.positionstack.com/v1/reverse?access_key=d72c6b9912f63eb9912d54fefcf89c7d&query=${lat},${lon}`;
-
-    this.http.get(url).subscribe((response: any) => {
-      if (response && response.data && response.data.length > 0) {
-
-        const result = response.data[0];
-        console.log(result)
-        this.studentAddr = result.label
-      } else {
-        this.studentAddr = 'Address not found'
-      }
-      console.log(this.studentAddr);
+  getAddrText()
+  {
+    this.loc.getAddress(this.latitude,this.longitude).subscribe((e:any)=>{
+      this.studentAddr=e.data[0].label;
     });
   }
 
   updateAddress() {
-    alert("updated")
+    const latDirection = this.latitude >= 0 ? "N" : "S";
+    const longDirection = this.longitude >= 0 ? "E" : "W";
+    const coordinates = `${Math.abs(this.latitude).toFixed(4)}° ${latDirection}, ${Math.abs(this.longitude).toFixed(4)}° ${longDirection}`;
+    this.loc.updateUserAddress(this.studentId, coordinates).subscribe(response => {
+      this.dialogRef.close();
+      window.location.reload();
+    }, (error: any) => {
+      console.error('Error updating Address', error);
+    });
   }
-
-  extractLatLong(coordinates: string) {
-    const regex = /([0-9.]+)°\s?([NS]),\s?([0-9.]+)°\s?([EW])/;
-    const matches = coordinates.match(regex);
-
-    if (!matches) {
-      throw new Error('Invalid coordinate format');
-    }
-
-    this.latitude = parseFloat(matches[1]) * (matches[2] === 'N' ? 1 : -1);
-    this.longitude = parseFloat(matches[3]) * (matches[4] === 'E' ? 1 : -1);
-
-  }
-
+  
   closeDialog(): void {
     this.dialogRef.close();
   }

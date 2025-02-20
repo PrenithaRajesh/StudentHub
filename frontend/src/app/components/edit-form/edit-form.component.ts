@@ -19,8 +19,7 @@ export class EditFormComponent {
       const updatedStudent = { ...this.data, ...form.value };
       this.dataService.updateUser(updatedStudent.studentId, updatedStudent).subscribe(response => {
         alert('Student data updated successfully!');
-        this.dialogRef.close();
-        window.location.reload();
+        this.dialogRef.close(updatedStudent);
       }, (error: any) => {
         console.error('Error updating user:', error);
       });
@@ -29,7 +28,6 @@ export class EditFormComponent {
 
   onCancel(): void {
     this.dialogRef.close();
-    window.location.reload();
   }
 
 }

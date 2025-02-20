@@ -11,8 +11,8 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 
 export class EmailComponent {
   emailData = {
-    senderEmail: '',
-    senderPassword: '',
+    senderEmail: 'jyotsnabh03@gmail.com',
+    senderPassword: 'cypw fqtg uwas gjva',
     receiverEmail: '',
     subject: '',
     body: '',

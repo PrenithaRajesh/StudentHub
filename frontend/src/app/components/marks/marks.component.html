@@ -1,11 +1,26 @@
-<h2 mat-dialog-title>Student Marks Details</h2>
-<div mat-dialog-content>
-  <p><strong>Subject:</strong> {{ subject }}</p>
-  <p><strong>Marks:</strong> {{ marks }}</p>
-  <p><strong>Average:</strong> {{ average.toFixed(2) }}</p>
-  <p><strong>Highest Marks:</strong> {{ highest }}</p>
-  <p><strong>Rank:</strong> {{ rank }}</p>
-</div>
-<div mat-dialog-actions>
-    <button mat-button (click)="closeDialog()">Close</button>
+<h2 mat-dialog-title class="dialog-title">Student Marks Details</h2>
+<div mat-dialog-content class="dialog-content">
+  <div class="dialog-row">
+    <span class="dialog-label">Subject:</span>
+    <span class="dialog-value">{{ subject }}</span>
   </div>
+  <div class="dialog-row">
+    <span class="dialog-label">Marks:</span>
+    <span class="dialog-value">{{ marks }}</span>
+  </div>
+  <div class="dialog-row">
+    <span class="dialog-label">Average:</span>
+    <span class="dialog-value">{{ average.toFixed(2) }}</span>
+  </div>
+  <div class="dialog-row">
+    <span class="dialog-label">Highest Marks:</span>
+    <span class="dialog-value">{{ highest }}</span>
+  </div>
+  <div class="dialog-row">
+    <span class="dialog-label">Rank:</span>
+    <span class="dialog-value">{{ rank }}</span>
+  </div>
+</div>
+<div mat-dialog-actions class="dialog-actions">
+  <button mat-button class="dialog-button" (click)="closeDialog()">Close</button>
+</div>

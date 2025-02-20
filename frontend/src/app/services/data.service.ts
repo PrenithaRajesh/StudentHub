@@ -1,42 +1,42 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, Subject } from 'rxjs';
+import { Subject } from 'rxjs';
 import { tap } from 'rxjs/operators';
+import { environment } from 'src/environments/environment';
+import { User, UserToAdd } from '../models/user.model';
 
 @Injectable({ providedIn: 'root' })
 export class DataService {
-  private apiUrl = 'http://localhost:5000/api/User';
+  private apiUrl = `${environment.apiBaseUrl}/User`;
 
-  // Subject to notify about user changes
   private userChangeSource = new Subject<void>();
   userChanged$ = this.userChangeSource.asObservable();
 
+  notifyUserChange() {
+    this.userChangeSource.next();
+  }
+
   constructor(private http: HttpClient) {}
 
-  getUsers(): Observable<any> {
+  getUsers() {
     return this.http.get(`${this.apiUrl}/getUsers`);
   }
 
-  addUser(user: any): Observable<any> {
-    return this.http.post(`${this.apiUrl}/addUser`, user).pipe(
-      tap(() => this.notifyUserChange()) // Notify components after adding
-    );
+  addUser(user: UserToAdd) {
+    return this.http
+      .post(`${this.apiUrl}/addUser`, user)
+      .pipe(tap(() => this.notifyUserChange()));
   }
 
-  updateUser(id: any, user: any): Observable<any> {
-    return this.http.put(`${this.apiUrl}/updateUser`, user).pipe(
-      tap(() => this.notifyUserChange()) // Notify components after updating
-    );
+  updateUser(id: number, user: User) {
+    return this.http
+      .put(`${this.apiUrl}/updateUser`, user)
+      .pipe(tap(() => this.notifyUserChange()));
   }
 
-  deleteUser(studentId: number): Observable<any> {
-    return this.http.delete(`${this.apiUrl}/deleteUser/${studentId}`).pipe(
-      tap(() => this.notifyUserChange()) // Notify components after deleting
-    );
-  }
-
-  // Emit event when user data changes
-  notifyUserChange() {
-    this.userChangeSource.next();
+  deleteUser(studentId: number) {
+    return this.http
+      .delete(`${this.apiUrl}/deleteUser/${studentId}`)
+      .pipe(tap(() => this.notifyUserChange()));
   }
 }

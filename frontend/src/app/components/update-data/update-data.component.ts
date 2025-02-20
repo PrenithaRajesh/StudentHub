@@ -19,7 +19,6 @@ export class UpdateDataComponent {
 
   onClick() {
     const rowData = { ...this.params.node.data };
-    console.log(`clicked on ID = ${this.params.value}`)
 
     const dialogRef = this.dialog.open(EditFormComponent, {
       width: '1200px',

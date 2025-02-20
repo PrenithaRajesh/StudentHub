@@ -11,15 +11,14 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 
 export class EmailComponent {
   emailData = {
-    senderEmail: 'jyotsnabh03@gmail.com',
-    senderPassword: 'cypw fqtg uwas gjva',
+    senderEmail: 'studenthubproj@gmail.com',
+    senderPassword: 'zdln upnx pnbb mxco',
     receiverEmail: '',
     subject: '',
     body: '',
     attachments: null
   };
 
-//  Add the constructor to the class
   constructor(
     private emailService: EmailService,
     public dialogRef: MatDialogRef<EmailComponent>,
@@ -30,14 +29,11 @@ export class EmailComponent {
     this.emailData.receiverEmail = data.receiverEmail;
   }
 
-  
-
-  // Trigger the popup on successful email send
   onSendEmail() {
     this.emailService.sendEmail(this.emailData).subscribe(
       response => {
         console.log('Email sent successfully!', response);
-        this.showSuccessPopup();  // Show success popup here
+        this.showSuccessPopup();  
         this.dialogRef.close();
       },
       error => {
@@ -46,12 +42,11 @@ export class EmailComponent {
       }
     );
   }
-//  Add event parameter to the function
-onFileChange(event: any) {
-  this.emailData.attachments = event.target.files.length ? event.target.files : null;
-}
 
-  // Success Snackbar Popup
+  onFileChange(event: any) {
+    this.emailData.attachments = event.target.files.length ? event.target.files : null;
+  }
+
   showSuccessPopup() {
     this.snackBar.open('✅ Email Sent Successfully!', 'Close', {
       verticalPosition: 'top',

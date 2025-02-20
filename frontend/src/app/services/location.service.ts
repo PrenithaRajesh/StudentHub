@@ -27,20 +27,11 @@ export class LocationService {
 
   }
 
-  getAddress(lat: number, lon: number) 
+  getAddress(lat: number, lon: number) : Observable<any> 
   {
-    const url = `http://api.positionstack.com/v1/reverse?access_key=d72c6b9912f63eb9912d54fefcf89c7d&query=${lat},${lon}`;
+    const url = `http://api.positionstack.com/v1/reverse?access_key=99e66a9c199bbe579816921c0cca37fe&query=${lat},${lon}`;
+    return this.http.get(url);
 
-    this.http.get(url).subscribe((response: any) => {
-      if (response && response.data && response.data.length > 0) {
-        const result = response.data[0];
-        console.log(result)
-        return result.label
-      } else {
-        return 'Address not found';
-      }
-    });
-    return 'err';
   }
 
   updateUserAddress(id: any, address: string): Observable<any> 

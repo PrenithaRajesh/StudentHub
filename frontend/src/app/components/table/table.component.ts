@@ -69,7 +69,8 @@ LoadUsers() {
       console.log('API Response:', data);
       this.rowData = data.map((student: any) => ({
         ...student,
-        address: this.loc.getAddress(this.loc.extractLatLong(student.address)[0],this.loc.extractLatLong(student.address)[1])+student.address,
+        //API KEY EXHAUSTED
+        //address: this.loc.getAddress(this.loc.extractLatLong(student.address)[0],this.loc.extractLatLong(student.address)[1])+student.address,
         totalMarks: student.physics + student.chemistry + student.maths
       }));
     },

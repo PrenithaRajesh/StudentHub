@@ -1,31 +1,29 @@
 <div>
     <mat-card class="example-card" style="margin: 16px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
         <mat-card-header>
-            <img mat-card-avatar
-                src="{{profilePic}}"
-                alt="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSzizM_iHuIf8aHaaEKUobvpW4wqmB9azArGQ&s" />
+            <img mat-card-avatar src="{{profilePic}}" alt="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSzizM_iHuIf8aHaaEKUobvpW4wqmB9azArGQ&s" />
             <mat-card-title>{{studentName}}</mat-card-title>
             <mat-card-subtitle>Student</mat-card-subtitle>
         </mat-card-header>
 
         <mat-card-content>
-            <div id="map" class="map" style="margin-bottom: 16px;"></div>
+            <div id="map" class="map"></div>
             <div>
                 <p>{{studentAddr}}</p>
                 <div style="display: flex; align-items: center; margin-bottom: 8px;">
                     <label for="latitude" style="margin-right: 8px;">Latitude:</label>
-                    <input id="latitude" [(ngModel)]="latitude" type="text" (ngModelChange)="updateMarker()" />
+                    <input id="latitude" [(ngModel)]="latitude" type="text" (ngModelChange)="updateMarker()" class="form-input" />
                 </div>
                 <div style="display: flex; align-items: center; margin-bottom: 8px;">
                     <label for="longitude" style="margin-right: 8px;">Longitude:</label>
-                    <input id="longitude" [(ngModel)]="longitude" type="text" (ngModelChange)="updateMarker()" />
+                    <input id="longitude" [(ngModel)]="longitude" type="text" (ngModelChange)="updateMarker()" class="form-input" />
                 </div>
             </div>
         </mat-card-content>
-        
-        <mat-card-actions style="display: flex; justify-content: center; gap: 16px;">
-            <button mat-button (click)="updateAddress()" >Update Location</button>
-            <button mat-button (click)="closeDialog()">Cancel</button>
+
+        <mat-card-actions class="dialog-actions">
+            <button class="dialog-button" mat-button (click)="updateAddress()">Update</button>
+            <button class="dialog-button" mat-button (click)="closeDialog()">Cancel</button>
         </mat-card-actions>
     </mat-card>
 </div>

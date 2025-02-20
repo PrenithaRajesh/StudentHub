@@ -29,7 +29,7 @@ export class AddMapComponent implements OnInit {
 
   params: any;
   studentId : any;
-  studentName: string = "John Locke";
+  studentName: string = "";
   studentAddr: string = '';
   latitude: number = 25;
   longitude: number = 85;
@@ -46,15 +46,10 @@ export class AddMapComponent implements OnInit {
     this.longitude=this.loc.extractLatLong(data.params.value)[1];
   }
 
-
   ngOnInit(): void {
-
-    console.log(this.latitude+" "+this.longitude)
-    this.studentAddr=this.loc.getAddress(this.latitude,this.longitude);
-    console.log(this.params)
+    this.getAddrText();
     this.initializeMap();
   }
-
 
   initializeMap() {
     this.markerFeature = new Feature({
@@ -111,14 +106,21 @@ export class AddMapComponent implements OnInit {
       this.latitude = lonLat[1];
       this.longitude = lonLat[0];
       this.updateMarker();
-      
     });
   }
 
   updateMarker() {
     this.markerFeature.setGeometry(new Point(fromLonLat([this.longitude, this.latitude])));
     this.map.getView().setCenter(fromLonLat([this.longitude, this.latitude]));
-    this.studentAddr=this.loc.getAddress(this.latitude,this.longitude);
+    this.getAddrText();
+    
+  }
+
+  getAddrText()
+  {
+    this.loc.getAddress(this.latitude,this.longitude).subscribe((e:any)=>{
+      this.studentAddr=e.data[0].label;
+    });
   }
 
   updateAddress() {
@@ -126,7 +128,6 @@ export class AddMapComponent implements OnInit {
     const longDirection = this.longitude >= 0 ? "E" : "W";
     const coordinates = `${Math.abs(this.latitude).toFixed(4)}° ${latDirection}, ${Math.abs(this.longitude).toFixed(4)}° ${longDirection}`;
     this.loc.updateUserAddress(this.studentId, coordinates).subscribe(response => {
-      alert('Address Updated');
       this.dialogRef.close();
       window.location.reload();
     }, (error: any) => {

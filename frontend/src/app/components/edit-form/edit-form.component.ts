@@ -17,7 +17,7 @@ export class EditFormComponent {
   onSubmit(form: NgForm): void {
     if (form.valid) {
       const updatedStudent = { ...this.data, ...form.value };
-      this.dataService.updateUser(updatedStudent.studentId, updatedStudent).subscribe(response => {
+      this.dataService.updateUser(updatedStudent).subscribe(response => {
         alert('Student data updated successfully!');
         this.dialogRef.close(updatedStudent);
       }, (error: any) => {

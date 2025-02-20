@@ -15,7 +15,7 @@ export class DataService {
     return this.http.post(`${this.apiUrl}/addUser`, user);
   }
 
-  updateUser(id: any, user: any): Observable<any> {
+  updateUser(user: any): Observable<any> {
     return this.http.put(`${this.apiUrl}/updateUser`, user);
   }
 

@@ -3,9 +3,9 @@ export interface User {
     firstName: string;
     lastName: string;
     email: string;
-    physics: string;
-    chemistry: string;
-    maths: string;
+    physics: number;
+    chemistry: number;
+    maths: number;
     description: string;
     profile: string;
     address: string;
@@ -17,9 +17,9 @@ export interface UserToAdd {
     firstName: string;
     lastName: string;
     email: string;
-    physics: string;
-    chemistry: string;
-    maths: string;
+    physics: number;
+    chemistry: number;
+    maths: number;
     description: string;
     profile: string;
     address: string;

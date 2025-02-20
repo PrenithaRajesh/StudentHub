@@ -23,13 +23,10 @@ export class TableComponent implements OnInit {
   frameworkComponents = { updateDataRenderer: UpdateDataComponent }
   columnDefs = [
 
-    // Radhika
     { headerName: 'ID', field: 'studentId', pinned: 'left', suppressMovable: true, cellRendererFramework: UpdateDataComponent, width: 60 },
 
-    //Prenitha
     { headerName:'Name',field: 'firstName' , onCellClicked: (params: any) => this.openNameDialog(params), columnGroupShow: 'open'},
 
-    // Jyotsna
     { 
       headerName:'Email',
       field:'email', 
@@ -38,10 +35,8 @@ export class TableComponent implements OnInit {
         this.openEmailDialog(params),
       columnGroupShow: 'open'},
 
-    // Baibhav
     { headerName: 'Address', field: 'address', onCellClicked: (params: any) => this.openAddDialog(params), columnGroupShow: 'open' },
 
-    // Paridhi and Anish
     {
       headerName: 'Marks',
       groupId: 'MarksGroup',
@@ -61,16 +56,13 @@ export class TableComponent implements OnInit {
 
   rowData: { studentId: number; firstName: string; email: string; address: string; physics: number; chemistry: number; maths: number; totalMarks?: number; }[] = [];
 
-  //private gridApi: any;
+
 
 LoadUsers() {
   this._DataService.getUsers().subscribe(
     (data: any) => {
-      console.log('API Response:', data);
       this.rowData = data.map((student: any) => ({
         ...student,
-        //API KEY EXHAUSTED
-        //address: this.loc.getAddress(this.loc.extractLatLong(student.address)[0],this.loc.extractLatLong(student.address)[1])+student.address,
         totalMarks: student.physics + student.chemistry + student.maths
       }));
     },
@@ -84,13 +76,10 @@ LoadUsers() {
     this.LoadUsers();
   }
 
-  private gridApi:any;
-  
 
   onGridReady(params: any) {
     params.api.sizeColumnsToFit();
-    //this.gridApi = params.api;
-    //this.gridApi.setRowData(this.rowData);
+
   }
 
   openMarksDialog(params: any) {
@@ -108,12 +97,6 @@ LoadUsers() {
 
   //For address : Baibhav
   openAddDialog(params: any) {
-
-    console.log("param start")
-    console.log(params)
-    console.log("param end")
-
-
     this.dialog.open(AddMapComponent, {
       width: '400px',
       data: { params }
@@ -121,7 +104,6 @@ LoadUsers() {
   }
 
   openNameDialog(params: any) {
-    console.log(params.data);
     this.dialog.open(NameComponent, {
       width: '800px',
       data: { params }
@@ -149,7 +131,7 @@ LoadUsers() {
     this.dialog.open(EmailComponent, {
       width: '400px',
       data: { receiverEmail },
-      autoFocus: false  // Add this line to prevent focus error
+      autoFocus: false 
     });
   }
  

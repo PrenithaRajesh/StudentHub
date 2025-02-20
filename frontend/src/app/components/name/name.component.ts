@@ -14,10 +14,8 @@ export class NameComponent implements OnInit {
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
-    public dialogRef: MatDialogRef<NameComponent>
-  ) {
-    console.log(data.params.data);
-  }
+    public dialogRef: MatDialogRef<NameComponent>) 
+    {}
 
   ngOnInit(): void {
     this.firstname = this.data.params.data.firstName;

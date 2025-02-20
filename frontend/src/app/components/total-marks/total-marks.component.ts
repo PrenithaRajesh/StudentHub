@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 
 @Component({
@@ -17,8 +17,8 @@ export class TotalMarksComponent{
 
   constructor(
     public dialogRef: MatDialogRef<TotalMarksComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any
-  ) {
+    @Inject(MAT_DIALOG_DATA) public data: any) 
+  {
     this.studentId = data.studentId;
     this.studentName = data.studentName;
     this.totalMarks = data.totalMarks;
@@ -27,17 +27,20 @@ export class TotalMarksComponent{
     this.rank = this.calculateRank(data.marksList, data.totalMarks);
   }
 
-  calculateAverage(marksList: number[]): number {
+  calculateAverage(marksList: number[]): number 
+  {
     const total = marksList.reduce((acc, mark) => acc + mark, 0);
     return total / marksList.length;
   }
 
-  calculateRank(marksList: number[], marks: number): number {
+  calculateRank(marksList: number[], marks: number): number 
+  {
     const sortedMarks = [...marksList].sort((a, b) => b - a);
     return sortedMarks.indexOf(marks) + 1;
   }
 
-  closeDialog(): void {
+  closeDialog(): void 
+  {
     this.dialogRef.close();
   }
 

@@ -27,7 +27,7 @@ export class DataService {
       .post(`${this.apiUrl}/addUser`, user)
       .pipe(tap(() => this.notifyUserChange()));
   }
-
+  
   updateUser(id: number, user: User) {
     return this.http
       .put(`${this.apiUrl}/updateUser`, user)

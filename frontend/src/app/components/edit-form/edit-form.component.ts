@@ -13,14 +13,13 @@ export class EditFormComponent implements OnInit {
   constructor(@Inject(MAT_DIALOG_DATA) public data: any,
     private dataService: DataService,
     private dialogRef: MatDialogRef<EditFormComponent>) { }
-
+  
     mode: string = 'Edit';
 
     ngOnInit(): void {
       if (!this.data.studentId) {
         this.mode = 'Add';
       }
-    }
 
     onSubmit(form: NgForm): void {
       if (form.valid) {

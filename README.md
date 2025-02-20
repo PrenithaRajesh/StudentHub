@@ -1,7 +1,7 @@
 
 # 🧑‍🎓StudentHub: A Collaborative Project 
 
-**StudentHub**  is a comprehensive student management system built that offers an interactive and user-friendly interface with real-time data updates. It enables efficient handling of student records, including personal details, academic performance, and email functionality.
+**StudentHub**  is a comprehensive student management system that offers an interactive and user-friendly interface with real-time data updates. It enables efficient handling of student records, including personal details, academic performance, and email functionality.
 
 ## 💻 Tech Stack
 
@@ -27,9 +27,9 @@ Other Tools & Libraries:
 
 **1. Student Record Management:** View, update, and manage student information by clicking on the ID.
 
-**2. Description:** OnClicking the name, you can see a personalized avatar and a short introduction on each users. The data is fetched from the Database and displayed in the UI.
+**2. Description:** On clicking the name, you can see a personalized avatar and a short introduction on each user. The data is fetched from the Database and displayed in the UI.
 
-**3. Email Integration:** Send emails to students directly from the browser. The Angular frontend sends an email request to the .NET backend. Ensures the application remains responsive while emails are being sent.
+**3. Email Integration:** Send emails to students directly from the browser. The Angular front end sends an email request to the .NET backend ensuring the application remains responsive while emails are being sent.
 
 **4. Location Service Integration:** Visualizes student addresses on an interactive map. Whenever a student’s address is changed, the UI updates dynamically.
 
@@ -38,7 +38,7 @@ Other Tools & Libraries:
 
 ## 🚀 API Reference
 
-#### METHOD + APIs 
+#### 🚀 METHOD + APIs 
 
 ```http
    GET      /api/user/test
@@ -62,7 +62,7 @@ Other Tools & Libraries:
 
 
 
-## Contribution Guidelines
+## ➡️ Contribution Guidelines
 
 - Fork the repository.
 - Create a new feature branch 
@@ -84,12 +84,12 @@ Other Tools & Libraries:
 
 - Create a Pull Request
 
-## Demo
+## 🎥 Demo
 
 Insert gif or link to demo
 
 
-## License
+## 🪪 License
 
 [MIT](https://choosealicense.com/licenses/mit/)
 
@@ -100,7 +100,7 @@ Permission is hereby granted, free of charge, to any person obtaining a copy of 
 The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 
-## Contributed By
+## 🔛 Contributed By
 
 This project is made by the following developers:
 

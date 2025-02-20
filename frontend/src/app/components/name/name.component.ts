@@ -1,5 +1,5 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-name',
@@ -12,7 +12,10 @@ export class NameComponent implements OnInit {
   profile!: string;
   description!: string;
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: any) {
+  constructor(
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    public dialogRef: MatDialogRef<NameComponent>
+  ) {
     console.log(data.params.data);
   }
 
@@ -21,5 +24,8 @@ export class NameComponent implements OnInit {
     this.lastname = this.data.params.data.lastName;
     this.profile = this.data.params.data.profile;
     this.description = this.data.params.data.description;
+  }
+  closeDialog(){
+    this.dialogRef.close();
   }
 }

@@ -20,7 +20,7 @@ export class EmailService {
     formData.append('Subject', emailData.subject);
     formData.append('Body', emailData.body);
 
-    if (emailData.attachments) {
+    if (emailData?.attachments) {
       for (let file of emailData.attachments) {
         formData.append('Attachments', file, file.name);
       }

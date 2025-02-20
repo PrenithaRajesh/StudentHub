@@ -56,8 +56,6 @@ namespace backend.Controllers
         {
             string sql = @"UPDATE StudentHub.Users SET Address = @Address WHERE StudentId = @StudentId";
             return dapper.StoreData(sql, new { Address = address, StudentId = studentId });
-
-
         }
     }
     }

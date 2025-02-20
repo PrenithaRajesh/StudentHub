@@ -1,28 +1,25 @@
 :host ::ng-deep .ag-theme-alpine {
-    background-color: rgb(249, 245, 227) !important; /* Background color */
-    color: rgb(129, 175, 249) !important; /* Foreground text color */
+    background-color: rgb(249, 245, 227) !important; 
+    color: rgb(129, 175, 249) !important; 
     font-family: 'Poppins', sans-serif !important;
     font-size: 16px !important;
     font-weight: 500 !important;
 }
 
-/* Header Styling */
 :host ::ng-deep .ag-header {
-    background-color: rgb(129, 175, 249) !important; /* Header background */
-    color: rgb(0, 0, 0) !important; /* Header text color */
+    background-color: rgb(129, 175, 249) !important; 
+    color: rgb(0, 0, 0) !important; 
     font-size: 18px !important;
     font-weight: 600 !important;
 }
 
-/* Header Cell Styling */
 :host ::ng-deep .ag-header-cell {
-    color: rgb(0,0,0) !important; /* Header text color */
-    border-bottom: 2px solid rgb(30, 39, 82) !important; /* Header column resize handle color */
+    color: rgb(0,0,0) !important; 
+    border-bottom: 2px solid rgb(30, 39, 82) !important;
     font-size: 18px !important;
     font-weight: 600 !important;
 }
 
-/* Row Styling */
 :host ::ng-deep .ag-row {
     font-size: 16px !important;
     font-weight: 500 !important;
@@ -30,15 +27,13 @@
     transition: all 0.3s ease-in-out;
 }
 
-/* Odd Row Styling */
 :host ::ng-deep .ag-row:nth-child(odd) {
-    background-color: rgba(0, 0, 0, 0.03) !important; /* Light shade for odd rows */
+    background-color: rgba(0, 0, 0, 0.03) !important; 
 }
 
-/* Hover Effect for 3D Highlight */
 :host ::ng-deep .ag-row:hover {
-    background-color: rgb(220, 220, 220) !important; /* Light grey shade */
-    box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.2); /* 3D shadow effect */
-    transform: scale(2.5); /* Slight lift effect */
+    background-color: rgb(220, 220, 220) !important; 
+    box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.2); 
+    transform: scale(2.5);
     transition: all 0.3s ease-in-out;
 }

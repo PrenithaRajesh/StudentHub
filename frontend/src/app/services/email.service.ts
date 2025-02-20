@@ -24,7 +24,6 @@ export class EmailService {
       }
     }
 
-    // Fix by explicitly allowing JSON responses
     const headers = new HttpHeaders({
       'Accept': 'application/json'
     });

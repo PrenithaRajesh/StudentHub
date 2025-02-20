@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, Injectable, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { DataService } from '../../services/data.service';
 import { MarksComponent } from '../marks/marks.component';
@@ -8,6 +8,7 @@ import { TotalMarksComponent } from '../total-marks/total-marks.component';
 import { UpdateDataComponent } from 'src/app/components/update-data/update-data.component';
 import { EmailComponent } from '../email/email.component';
 import { LocationService } from 'src/app/services/location.service';
+import { AgGridAngular } from 'ag-grid-angular';
 
 @Component({
   selector: 'app-table',
@@ -15,8 +16,11 @@ import { LocationService } from 'src/app/services/location.service';
   styleUrls: ['./table.component.scss']
 })
 
+@Injectable({ providedIn: 'root' })
 export class TableComponent implements OnInit {
   constructor(private _DataService: DataService, private dialog: MatDialog) {}
+
+  @ViewChild(AgGridAngular) agGrid?: AgGridAngular; 
 
   loc = inject(LocationService);
 
@@ -80,12 +84,17 @@ LoadUsers() {
   );
 }
 
-  ngOnInit(): void {
-    this.LoadUsers();
-  }
+ngOnInit(): void {
+  this._DataService.userChanged$.subscribe(() => {
+    this.refreshGrid();
+  });
+  this.LoadUsers();
+}
 
-  private gridApi:any;
-  
+refreshGrid() {
+  this.agGrid?.api.setRowData(this.rowData);
+  this.agGrid?.api.refreshCells();
+}
 
   onGridReady(params: any) {
     params.api.sizeColumnsToFit();
@@ -152,7 +161,6 @@ LoadUsers() {
       autoFocus: false  // Add this line to prevent focus error
     });
   }
- 
 }
 
 

@@ -32,7 +32,7 @@ namespace backend.Controllers
         [HttpPost("addUser")]
         public bool AddUser(User user)
         {
-            string sql = @"INSERT INTO StudentHub.Users (FirstName, LastName, Profile, Description, Email, Address, Physics, Chemistry, Maths, CreatedAt, UpdatedAt) VALUES (@FirstName, @LastName, @Profile, @Description, @Email, @Address, @Physics, @Chemistry, @Maths, @CreatedAt, @UpdatedAt)";
+            string sql = @"INSERT INTO StudentHub.Users (FirstName, LastName, Profile, Description, Email, Address, Physics, Chemistry, Maths) VALUES (@FirstName, @LastName, @Profile, @Description, @Email, @Address, @Physics, @Chemistry, @Maths)";
             return dapper.StoreData(sql, user);
         }
 

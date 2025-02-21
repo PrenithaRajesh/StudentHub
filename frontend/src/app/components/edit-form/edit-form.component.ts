@@ -20,6 +20,7 @@ export class EditFormComponent implements OnInit {
       if (!this.data.studentId) {
         this.mode = 'Add';
       }
+    }
 
     onSubmit(form: NgForm): void {
       if (form.valid) {

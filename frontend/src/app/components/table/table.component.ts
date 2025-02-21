@@ -122,6 +122,8 @@ export class TableComponent implements OnInit {
 
   ngOnInit(): void {
     this._DataService.userChanged$.subscribe(() => {
+      console.log('User data changed');
+      this.LoadUsers();
       this.refreshGrid();
     });
     this.LoadUsers();

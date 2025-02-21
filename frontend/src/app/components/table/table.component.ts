@@ -15,6 +15,7 @@ import { UpdateDataComponent } from 'src/app/components/update-data/update-data.
 import { EmailComponent } from '../email/email.component';
 import { LocationService } from 'src/app/services/location.service';
 import { AgGridAngular } from 'ag-grid-angular';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-table',
@@ -23,7 +24,7 @@ import { AgGridAngular } from 'ag-grid-angular';
 })
 @Injectable({ providedIn: 'root' })
 export class TableComponent implements OnInit {
-  constructor(private _DataService: DataService, private dialog: MatDialog) {}
+  constructor(private _DataService: DataService, private dialog: MatDialog, private snackBar: MatSnackBar) {}
 
   @ViewChild(AgGridAngular) agGrid?: AgGridAngular;
 
@@ -93,6 +94,19 @@ export class TableComponent implements OnInit {
         },
       ],
     },
+    {
+      headerName: 'Delete',
+      field: 'delete',
+      width: 100,
+      cellRenderer: (params: any) => {
+        return `
+          <button class="delete-btn" data-id="${params.data.studentId}">
+            <i class="material-icons">delete</i>
+          </button>
+        `;
+      },
+      onCellClicked: (params: any) => this.DeleteUsers(params.data.studentId),
+    },    
   ];
 
   rowData: {
@@ -117,6 +131,20 @@ export class TableComponent implements OnInit {
       (error) => {
         console.error('Error fetching users:', error);
       }
+    );
+  }
+
+  DeleteUsers(studentId: number){
+    this._DataService.deleteUser(studentId).subscribe(
+      () => {
+        this.snackBar.open('✅ Deleted Succesfully', 'Close', {
+          verticalPosition: 'top',
+          horizontalPosition: 'center',
+          panelClass: ['success-snackbar']
+        });
+        this.LoadUsers();
+        this.refreshGrid();
+      },
     );
   }
 

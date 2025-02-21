@@ -16,7 +16,7 @@ export class EmailComponent {
     receiverEmail: '',
     subject: '',
     body: '',
-    attachments: null
+    attachments: []
   };
 
   constructor(

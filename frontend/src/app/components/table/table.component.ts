@@ -51,7 +51,6 @@ export class TableComponent implements OnInit {
     {
       headerName: 'Email',
       field: 'email',
-      CellRenderer: 'emailRenderer',
       onCellClicked: (params: any) => this.openEmailDialog(params),
       columnGroupShow: 'open',
     },

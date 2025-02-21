@@ -25,14 +25,12 @@ export class EmailComponent {
     private snackBar: MatSnackBar, 
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {
-    console.log('Received receiverEmail:', data.receiverEmail); 
     this.emailData.receiverEmail = data.receiverEmail;
   }
 
   onSendEmail() {
     this.emailService.sendEmail(this.emailData).subscribe(
       response => {
-        console.log('Email sent successfully!', response);
         this.showSuccessPopup();  
         this.dialogRef.close();
       },
